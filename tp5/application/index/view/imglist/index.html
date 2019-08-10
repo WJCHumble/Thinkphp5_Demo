@@ -1,0 +1,47 @@
+
+<link rel="stylesheet" type="text/css" href="__STATIC__/home/list.css"  />
+	{include file="public/header" /}
+
+	<div class="content">
+		<div class="content_home">
+			<div class="znyj">
+				<div class="znyj-title">
+					<div class="znyjtxt">{$columname.name}</div>
+					<div class="znyjtxtr">硬件评测、合作请联系：WJCHumble 	</div><hr>
+				</div>
+				<div class="znyj_c">
+					{volist name="article" id="article"}
+					<div class="znyj_c_box">
+						<ul>
+							<li class="boxpic">
+								<a href="{:url('artlist/index', array('id'=>$article.id))}" target="_blank" title="">
+									<img src="__STATIC__/uploads/article/{$article.img}" width="360" height="230"/>
+								</a>
+							</li>
+							<li>
+								<dl>
+									<dt>
+										<a href="" target="_blank" title="">{$article.title}</a>
+									</dt>
+									<dd>
+										<p class="d">{$article.aname} / {:date('Y-m-d H:i:s',  $article.time)}</p>
+										<p class="c"> {$article.title}...</p>
+									</dd>
+								</dl>
+							</li>
+						</ul>
+					</div>
+					{/volist}
+				</div>
+				<div class="hlgd-page page-nav">
+					<ul class='paginationall'>
+						{$page}
+						<!-- <a href="javascript:void(0);" class="prev disable">&lt;</a><a href="javascript:void(0);" class="current">1</a><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a><a href="">6</a><a href="">... 50</a><a href="" class="next">&gt;</a> -->
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file="public/footer" /}

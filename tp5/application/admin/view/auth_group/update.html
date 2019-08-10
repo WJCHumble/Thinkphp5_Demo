@@ -1,0 +1,95 @@
+
+{layout name="public/layout" /}
+
+<div class="col-md-10">
+	<ol class="breadcrumb">
+	  <li><a href="#"><span class="glyphicon glyphicon-home"></span>&nbsp;首页</a></li>
+	  <li><a href="#">规则管理</a></li>
+	  <li class="active">添加规则</li>
+	  <a href="" style="float:right;height:25px;" class="btn btn-success"><span class="glyphicon glyphicon-refresh"></span></a>
+	  <span style="clear:both"></span>
+	</ol>
+	<div class="panel panel-default">
+
+		</div>
+		<div class="panel-body">
+        <form action="{:url('update')}" method="post">
+          <div class="form-group">
+            <label for="">管理员名称</label>
+            <select  name="title" class="form-control">
+              {volist name="mdata" id="mdata"}
+              <option value="{$mdata.username}" {$udata.title==$mdata.username?'selected':''}>{$mdata.username}</option>
+              {/volist}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="">状态</label>
+            <br>
+            <label for="radio-inline">
+              <input type="radio" name="status" value="1" {$udata.status==1?'checked':''}>正常
+            </label>
+            <br>
+            <label for="radio-inline">
+              <input type="radio" name="status" value="0" {$udata.status==0?'checked':''}>禁用
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="">规则</label>
+            <table>
+              {volist name="authRTree" id="tree"}
+              <tr>
+                <td>
+                  <?php
+                  echo str_repeat("&nbsp", $tree['level']*5);
+                  ?>
+                  <input type="checkbox" name="rules[]" value="{$tree.id}" dataid="{$tree.dataid}" class="checkbox-parent {$tree.level==0?'':'checkbox-child'}"
+                  <?php
+                  if(in_array($tree['id'], $arr)){
+                    echo "checked";
+                  }
+
+                  ?>
+                  >
+                  <span>{$tree.title}</span>
+                </td>
+              </tr>
+              {/volist}
+
+            </table>
+          </div>
+          <input type="hidden" name="id" value="{$udata.id}">
+          <div class="form-group">
+            <input value="提交" class="btn btn-success" type="submit">
+            <input type="reset" value="重置" class="btn btn-danger">
+          </div>
+        </form>
+    </div>
+		<div class="panel-footer">
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+/* 权限配置 */
+$(function () {
+    //动态选择框，上下级选中状态变化
+    $('input.checkbox-parent').on('change', function () {
+        var dataid = $(this).attr("dataid");
+        $('input[dataid^=' + dataid + ']').prop('checked', $(this).is(':checked'));
+    });
+    $('input.checkbox-child').on('change', function () {
+        var dataid = $(this).attr("dataid");
+        dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+        var parent = $('input[dataid=' + dataid + ']');
+        if ($(this).is(':checked')) {
+            parent.prop('checked', true);
+        } else {
+            //父级
+            if ($('input[dataid^=' + dataid + '-]:checked').length == 0) {
+                parent.prop('checked', false);
+            }
+        }
+    });
+});
+</script>

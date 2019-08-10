@@ -1,0 +1,87 @@
+﻿{include file="public/header" /}
+<div class="content">
+	<div class="content_home">
+		<div class="home_left">
+			<div class="home_pic">
+				<div id="content">
+					<div class="banner" id="b04">
+					    <ul>
+								{volist name="lunbo" id="lunbo"}
+					        <li><a href="{$lunbo.href}"><img src="__STATIC__/uploads/lunbo/{$lunbo.img}" alt="" width="790px" height="480px"></a></li>
+									{/volist}
+					    </ul>
+					    <a href="javascript:void(0);" class="unslider-arrow04 prev"><img class="arrow" id="al" src="__STATIC__/home/arrowl.png" alt="prev" width="20" height="35"></a>
+					    <a href="javascript:void(0);" class="unslider-arrow04 next"><img class="arrow" id="ar" src="__STATIC__/home/arrowr.png" alt="next" width="20" height="37"></a>
+					</div>
+					<script>
+						$(document).ready(function(e) {
+						    var unslider04 = $('#b04').unslider({
+								dots: true
+							}),
+							data04 = unslider04.data('unslider');
+							$('.unslider-arrow04').click(function() {
+						        var fn = this.className.split(' ')[1];
+						        data04[fn]();
+						    });
+						});
+					</script>
+				</div>
+			</div>
+			<div class="hljxdd">
+				<div class="hljxdd-title">
+					<div class="hljxddttxt">精选导读</div><hr>
+				</div>
+				<div class="hljxdd-content">
+					<div class="hljxddc-box ">
+						<div class="hljxddc-box-pic">
+							<a href=""  target="_blank">
+								<img src="__STATIC__/home/1.jpg" width="241" height="165"/>
+							</a>
+						</div>
+						<div class="hljxddc-box-txt">
+							<a href="{:url('Artlist/index')}" target="_blank">被寄予厚望却反响平平的Pro 7，让魅族的这个冬天格外冷</a>
+						</div>
+					</div>
+				</div>
+				<div class="hlad1">
+					<a href="" target="_blank"><img src="__STATIC__/home/1.jpg"  alt="" /></a>
+				</div>
+				<div class="hlrmtj">
+					<div class="hlrmtj-title">
+						<div class="hlrmtjttxt">热门推荐</div><hr>
+					</div>
+					<div class="hlrmtj-content" id="mainList">
+						<ul>
+							<li class="rtmj-box">
+								<dt>
+									<a href="" target="_blank" title="又一场资本大戏，运满满与货车帮究竟谁合并谁"> <img src="__STATIC__/home/1.jpg" alt="又一场资本大戏，运满满与货车帮究竟谁合并谁" width="250" height="165"/> </a>
+								</dt>
+								<dd>
+									<h3>
+										<a href="" target="_blank" title="又一场资本大戏，运满满与货车帮究竟谁合并谁">又一场资本大戏，运满满与货车帮究竟谁合并谁</a>
+									</h3>
+									<p>甭提了，以后都是一家人了。</p>
+									<p>李星 / 态度 / 2017-11-28 16:17</p>
+								</dd>
+							</li>
+						</ul>
+					</div>
+					<div class="rtmj-more" id="moreBtn">
+						<a href="#" class="btn hlmore">更多文章</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		{include file="public/right" /}
+	</div>
+</div>
+<div class="links">
+	<div class="links_txt">
+		<div class="links_txt_title">友情链接</div>
+			<ul>
+				<li><a href="" target="_blank">新智派</a> </li>
+			</ul>
+		</div>
+	</div>
+</div>
+{include file="public/footer" /}

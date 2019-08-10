@@ -1,0 +1,24 @@
+<link rel="stylesheet" type="text/css" href="__STATIC__/home/list.css"  />
+	{include file="public/header" /}
+	<div class="content">
+		<div class="content_home">
+			<div class="home_left">
+				<div class="hl_content" style="float: left;">
+					<div class="hl_c_title">
+						<h2>{$article.title}<i class="tag">{$columname.name}</i></h2>
+					</div>
+					<div class="hl_c_twid">
+						<a class="source fl-l" href="javascript:;" style="color:#a6a6a6">极客公园 </a>/ {$article.aname} / {:date('Y-m-d H:m:s', $article.time)}
+					</div>
+					<div class="hl_c_wcid">
+						{$article.des}
+					</div>
+					<div class="hl_body">
+						{$article.content}
+					</div>
+				</div>
+			</div>
+			{include file="public/right" /}
+		</div>
+	</div>
+{include file="public/footer" /}

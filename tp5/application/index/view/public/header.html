@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>{$dat.title}</title>
+<link rel="shortcut icon" href="http://www.ikanchai.com/favicon.ico" />
+<meta name="keywords" content="{$dat.keywords}" />
+<meta name="description" content="{$dat.des}" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/home/style.css"  />
+<link rel="stylesheet" type="text/css" href="__STATIC__/home/index.css" />
+<script type="text/javascript" src="__STATIC__/home/jquery-1.9.1.min.js" ></script>
+<script type="text/javascript" src="__STATIC__/home/Common.js" ></script>
+<script type="text/javascript" src="__STATIC__/home/script.js" ></script>
+<script type="text/javascript" language="javascript" src="__STATIC__/home/jquery.easing.1.3.js" ></script>
+<script type="text/javascript" language="javascript" src="__STATIC__/home/jquery.skitter.min.js" ></script>
+<script type="text/javascript" language="javascript" src="__STATIC__/home/more.js" ></script>
+<script src="__STATIC__/home/unslider.min.js"></script>
+<link rel="stylesheet" href="__STATIC__/home/slide.css">
+</head>
+<body>
+<div class="warp">
+<div class="header">
+	<div class="head">
+		<div class="logo">
+			<a href="index.htm"></a>
+		</div>
+		<div class="global-nav">
+			<ul class="main-menu">
+				<li>
+					<a href="{:url('Index/index')}">首页</a>
+				</li>
+        {volist name="colum" id="colum"}
+				<li class="dropdown nav-dropdown">
+					<a href="javascript:;" class="has-drop-menu">{$colum.name}<i class="arrow"></i></a>
+					<ul class="dropdown-menu">
+						<div class="sort channel clearfix">
+
+							<ul>
+								{volist name="colum.child" id="ccolum"}
+								<li>
+									{if condition="$ccolum.type eq 1"}
+									<a href="{:url('article/index', array('id'=>$ccolum.id))}" >{$ccolum.name}</a>
+									{else /}
+									<a href="{:url('imglist/index', array('id'=>$ccolum.id))}" >{$ccolum.name}</a>
+									{/if}
+								</li>
+								{/volist}
+							</ul>
+						</div>
+						<div class="tags channel clearfix">
+							<ul></ul>
+						</div>
+					</ul>
+				</li>
+				{/volist}
+			</ul>
+		</div>
+		<div class="user">
+			<!-- <div class="loginok">
+				<ul id="nav">
+					<li class="nav_li3_on">
+						<a class="btn-loginok" href="javascript:;">
+							<img src="__STATIC__/home/1.jpg" alt="" align="absmiddle" width="20" height="20"><em class="head-username" style="font-style:normal"></em>
+						</a>
+						<div id="nav_menu3" class="nav_li_child" style="display: none;">
+							<div class="showdown">
+								<a href="" class="head-member" target="_blank">会员中心</a>
+								<a href="" target="_blank">个人设置</a>
+								<a href="" target="_blank">在线投稿</a>
+								<a href="" target="_blank">我的稿件</a>
+								<a href="" class="head-logout" target="_blank">安全退出</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div> -->
+			<div class="login" style=" display:;">
+				<a href="" class="btn btn-login">登陆</a>
+			</div>
+			<div class="tougao" style=" display:;">
+				<a href="" class="btn btn-login">注册</a>
+			</div>
+			<div class="search">
+				<ul>
+					<li>
+						<form class="form-search" action="">
+							<input type="text" placeholder="输入搜索内容..." class="nav-search-input" name="search" id="baiduSearch"/>
+							<i class="icon-search"></i>
+							<i class="close"></i>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

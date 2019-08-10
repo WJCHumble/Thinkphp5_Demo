@@ -1,0 +1,86 @@
+{layout name="public/layout" /}
+<div class="col-md-10">
+    <ol class="breadcrumb">
+        <li><a href="{:url('Index/index')}"><span class="glyphicon glyphicon-home"></span>&nbsp;首页</a></li>
+        <li><a href="#">文章管理</a></li>
+        <li class="active">文章列表</li>
+        <a href="" style="float:right;height:25px;" class="btn btn-success"><span class="glyphicon glyphicon-refresh"></span></a>
+        <span style="clear:both"></span>
+    </ol>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <button class="btn btn-danger" onclick="delAll()"> <span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;批量删除</button>
+            <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span><a href="{:url('add')}" style="color:white">&nbsp;&nbsp;添加文章</a></button>
+            <div class="pull-right" style="margin-left:30px;">
+                <p class="tot">共有数据:&nbsp;<b id="tot">{$count}</b>&nbsp;条</p>
+            </div>
+            <form class="form-inline pull-right" action="{:url('index')}" role="form">
+                <div class="form-group">
+                    <input type="text" name="search" class="form-control" placeholder="请输入要搜索内容">
+                </div>
+                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search">&nbsp;搜索</span></button>
+            </form>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th><input type="checkbox" class="checkAll" name="items" id=""></th>
+                    <th>id</th>
+                    <th>文章标题</th>
+                    <!-- <th>密码</th> -->
+                    <th>文章图片</th>
+                    <th>作者</th>
+                    <th>所属栏目</th>
+                    <th>操作</th>
+                </tr>
+
+                {volist name="data" id='dat'}
+                <tr id="tr{$dat.id}">
+                    <td><input type="checkbox" class="checks" value="{$dat.id}"></td>
+                    <td>{$dat.id}</td>
+                    <td><a href="{:url('detail', array('id'=>$dat.id))}">{$dat.title}</a></td>
+                    <td><img src="__STATIC__/uploads/article/{$dat.img}" alt="" class="img-resposive" width="80px" height="50px"></td>
+                    <td>{$dat.authorname}</td>
+                    <td>{$dat.columname}</td>
+                    <td>
+                    <a class="glyphicon glyphicon-trash" href="{:url('del', array('id'=>$dat.id))}"></a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a class="glyphicon glyphicon-pencil" href="{:url('update', array('id'=>$dat.id))}"></a>
+                    </td>
+                </tr>
+                {/volist}
+                {$page}
+            </table>
+        </div>
+        <div class="panel-footer">
+
+        </div>
+    </div>
+</div>
+
+<script>
+//批量删除
+$('.checkAll').click(function(){
+	$('.checks').click();
+});
+//批量删除
+function delAll(){
+	datas = $('.checks:checked');
+	arr = new Array();
+	for(i = 0; i < datas.length; i++){
+		arr[i] = datas.eq(i).val();
+	}
+	str = arr.join(',', arr);
+	$.post("{:url('ajax_dellAll')}", {str:str}, function(data){
+		if (data == arr.length) {
+			for (i = 0; i < arr.length; i++) {
+				$('#tr' + arr[i]).remove();
+			}
+			$("[name=items]:checkbox").attr("checked", false);
+		}else {
+			alert("删除失败");
+		}
+	});
+	// console.log(datas);
+}
+</script>
